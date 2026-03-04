@@ -1,173 +1,867 @@
-<section data-content="ko">
-  <h1>개인정보처리방침</h1>
-  <div class="meta">최종 업데이트: 2025-01-01</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trip Receipt – Privacy Policy & Terms of Service</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1612;
+    --paper: #faf8f4;
+    --accent: #c8773a;
+    --accent-light: #f0e4d4;
+    --muted: #7a7065;
+    --border: #e0d9cf;
+    --section-bg: #f4f0e8;
+  }
 
-  <div class="hr"></div>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <p>
-    개인 개발자 <strong>김성훈</strong>(이하 “운영자”)는 이용자의 개인정보를 중요하게 생각하며 관련 법령을 준수합니다.
-    본 방침은 <strong>Trip Receipt</strong> 서비스(이하 “서비스”)에 적용됩니다.
-  </p>
+  html { scroll-behavior: smooth; }
 
-  <h2>1. 수집하는 정보</h2>
-  <ul>
-    <li><strong>계정 정보</strong>: Google 로그인 또는 Apple 로그인(Sign in with Apple) 제공 과정에서 전달되는 정보(예: 이메일, 사용자 식별자). 제공되는 항목은 로그인 제공자 설정 및 이용자 선택에 따라 달라질 수 있습니다.</li>
-    <li><strong>사용자 입력 정보</strong>: 지출 기록, 메모, 장소명 등 서비스 이용을 위해 사용자가 직접 입력한 콘텐츠</li>
-    <li><strong>앱 이용 정보</strong>: 기능 사용 기록, 오류 로그(최소 범위)</li>
-    <li><strong>기기 정보</strong>: OS 버전, 앱 버전 등(품질 개선 및 문제 해결 목적)</li>
-  </ul>
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.75;
+  }
 
-  <h2>2. 이용 목적</h2>
-  <ul>
-    <li>서비스 제공 및 계정 기반 데이터 동기화</li>
-    <li>서비스 품질 개선 및 오류 대응</li>
-    <li>고객 문의 응대</li>
-    <li><strong>AI 분석 기능 제공</strong> (아래 “외부 AI API” 항목 참고)</li>
-  </ul>
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 64px 40px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(200,119,58,0.25) 0%, transparent 70%);
+  }
+  .app-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 28px;
+  }
+  .app-badge::before {
+    content: '✈';
+    font-size: 14px;
+    color: var(--accent);
+  }
+  header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  header h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  header .subtitle {
+    color: rgba(255,255,255,0.55);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  .effective-date {
+    display: inline-block;
+    margin-top: 24px;
+    background: rgba(200,119,58,0.2);
+    border: 1px solid rgba(200,119,58,0.4);
+    color: #e8a870;
+    padding: 5px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+  }
 
-  <h2>3. 보관 및 처리</h2>
-  <ul>
-    <li>서비스 제공을 위해 이용자가 입력한 기록(지출/메모 등)은 서버에 저장될 수 있습니다.</li>
-  </ul>
+  /* ── LANGUAGE NAV ── */
+  .lang-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+  }
+  .lang-nav a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    padding: 5px 16px;
+    border-radius: 100px;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+  .lang-nav a:hover,
+  .lang-nav a.active {
+    color: var(--paper);
+    background: rgba(200,119,58,0.25);
+    border-color: rgba(200,119,58,0.4);
+  }
 
-  <h2>4. 외부 서비스(제3자) 및 위탁</h2>
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
 
-  <h3>4-1. 외부 AI API</h3>
-  <div class="notice">
-    본 서비스는 이용자가 요청한 AI 분석 기능을 제공하기 위해, 이용자가 입력한 텍스트(예: 메모/기록 내용 등)를 외부 AI API로 전송하여 처리할 수 있습니다.
-    전송되는 정보는 기능 제공에 필요한 최소 범위로 제한됩니다.
+  /* ── LANGUAGE BLOCK ── */
+  .lang-block {
+    padding: 72px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .lang-block:last-child { border-bottom: none; }
+
+  .lang-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--accent);
+  }
+  .lang-flag {
+    font-size: 2rem;
+    line-height: 1;
+  }
+  .lang-title-wrap h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .lang-title-wrap span {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION ── */
+  .policy-section {
+    margin-bottom: 36px;
+  }
+  .policy-section h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 12px;
+    padding-left: 14px;
+    border-left: 3px solid var(--accent);
+    line-height: 1.4;
+  }
+  .policy-section p {
+    color: #3d3730;
+    margin-bottom: 10px;
+    font-size: 14.5px;
+  }
+  .policy-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 10px;
+  }
+  .policy-section ul li {
+    position: relative;
+    padding-left: 20px;
+    color: #3d3730;
+    font-size: 14.5px;
+    margin-bottom: 5px;
+  }
+  .policy-section ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .info-box {
+    background: var(--accent-light);
+    border: 1px solid rgba(200,119,58,0.3);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 13.5px;
+    color: #5a3820;
+  }
+  .info-box strong { color: var(--accent); }
+
+  .contact-box {
+    background: var(--section-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-top: 12px;
+  }
+  .contact-box a {
+    color: var(--accent);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .legal-note {
+    background: var(--ink);
+    color: rgba(255,255,255,0.75);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 12px 0;
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+  .legal-note strong { color: var(--accent); }
+
+  /* ── DIVIDER ── */
+  .lang-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0;
+    padding: 16px 0;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .lang-divider::before, .lang-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 12.5px;
+    line-height: 2;
+  }
+  footer strong { color: rgba(255,255,255,0.7); }
+
+  @media (max-width: 600px) {
+    header { padding: 48px 20px 36px; }
+    .lang-block { padding: 48px 0 32px; }
+    .lang-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="app-badge">Trip Receipt</div>
+  <h1>Privacy Policy &amp;<br><em>Terms of Service</em></h1>
+  <p class="subtitle">Smart Travel Expense Tracker</p>
+  <div class="effective-date">v1.0 (Effective 2026-03-04)</div>
+</header>
+
+<nav class="lang-nav">
+  <a href="#en" class="active">🇺🇸 English</a>
+  <a href="#ko">🇰🇷 한국어</a>
+  <a href="#ja">🇯🇵 日本語</a>
+  <a href="#th">🇹🇭 ภาษาไทย</a>
+</nav>
+
+<main>
+<div class="container">
+
+<!-- ════════════════════════════════════════
+     ENGLISH
+════════════════════════════════════════ -->
+<section class="lang-block" id="en">
+  <div class="lang-header">
+    <div class="lang-flag">🇺🇸</div>
+    <div class="lang-title-wrap">
+      <h2>Privacy Policy</h2>
+      <span>English · Official Version</span>
+    </div>
   </div>
-  <ul>
-    <li>AI 분석 제공을 위해 제3자 서비스가 데이터 처리를 수행할 수 있습니다.</li>
-    <li>운영자는 기능 제공에 필요한 범위 내에서만 전송·처리되도록 관리합니다.</li>
-  </ul>
 
-  <h3>4-2. 장소 검색 기능</h3>
-  <div class="notice">
-    본 서비스는 지도 표시 없이, 사용자가 장소를 검색해 입력할 수 있는 기능을 제공할 수 있으며, 이 과정에서 <strong>Google Places API</strong> 등 외부 서비스를 사용할 수 있습니다.
+  <div class="legal-note">
+    <strong>Language Precedence:</strong> This Privacy Policy is available in multiple languages. In the event of any conflict or inconsistency between translations, the <strong>English version shall prevail</strong> and take precedence.
   </div>
 
-  <h2>5. 이용자의 선택 및 삭제</h2>
-  <ul>
-    <li>이용자는 앱 내 제공되는 기능을 통해 자신의 기록을 삭제할 수 있습니다(제공 여부는 앱 버전에 따라 달라질 수 있음).</li>
-    <li>개인정보는 목적 달성 후 지체 없이 삭제합니다. 단, 법령상 보관 의무가 있는 경우 해당 기간 동안 보관될 수 있습니다.</li>
-  </ul>
+  <div class="policy-section">
+    <h3>1. Introduction</h3>
+    <p>Welcome to <strong>Trip Receipt – Smart Travel Expense Tracker</strong> ("App", "we", "our", or "us"). We are committed to protecting your personal information and your right to privacy.</p>
+    <p>This Privacy Policy describes how Trip Receipt collects, uses, stores, and shares information when you use our mobile application. By using the App, you agree to the collection and use of information in accordance with this policy.</p>
+    <p>If you have any questions or concerns about this policy or our practices, please contact us at the email address provided at the end of this document.</p>
+  </div>
 
-  <h2>6. 문의</h2>
-  <p>개인정보 관련 문의: <a href="mailto:az0856@naver.com.app">az0856@naver.com.app</a></p>
+  <div class="policy-section">
+    <h3>2. Information We Collect</h3>
+    <p>We collect the following categories of information:</p>
+    <p><strong>Account Information</strong></p>
+    <ul>
+      <li>Email address and account identifier (via Google Login or Sign in with Apple)</li>
+      <li>Profile name (if provided by your authentication provider)</li>
+    </ul>
+    <p><strong>Receipt &amp; Expense Data</strong></p>
+    <ul>
+      <li>Receipt images uploaded by you for scanning purposes</li>
+      <li>Extracted receipt data (store name, date, amount, currency)</li>
+      <li>Trip expense records and budgets you create</li>
+      <li>Group expense data shared with trip members</li>
+    </ul>
+    <p><strong>Technical &amp; Usage Data</strong></p>
+    <ul>
+      <li>Device type, operating system, and app version</li>
+      <li>Usage logs and crash reports for service improvement</li>
+      <li>AI processing inputs and outputs from receipt analysis</li>
+    </ul>
+  </div>
 
-  <div class="footer">© 2025 Trip Receipt. All rights reserved.</div>
+  <div class="policy-section">
+    <h3>3. How We Use Your Information</h3>
+    <p>We use the information we collect for the following purposes:</p>
+    <ul>
+      <li><strong>Account Authentication:</strong> To verify your identity and manage your account securely.</li>
+      <li><strong>AI Receipt Scanning:</strong> Uploaded receipt images are processed by AI (Google Gemini API) solely to extract expense data such as store name, date, and amount. Images are used only for this extraction purpose and are not used for advertising or profiling.</li>
+      <li><strong>Expense Tracking &amp; Management:</strong> To store and organize your trip expenses, budgets, and currency conversions.</li>
+      <li><strong>Group Expense Sharing:</strong> To enable collaborative expense tracking and settlement with your trip members.</li>
+      <li><strong>Data Export:</strong> To generate and export your expense reports in your preferred format.</li>
+      <li><strong>Service Improvement:</strong> To analyze usage patterns, fix bugs, and improve app performance and reliability.</li>
+    </ul>
+    <div class="info-box">
+      <strong>Important:</strong> We do not sell, rent, or trade your personal information to third parties for commercial or marketing purposes.
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <h3>4. Third-Party Services</h3>
+    <p>Trip Receipt integrates the following third-party services to deliver its functionality:</p>
+    <ul>
+      <li><strong>Google (OAuth):</strong> Used for account authentication. Governed by Google's Privacy Policy.</li>
+      <li><strong>Apple (Sign in with Apple):</strong> Used for account authentication. Governed by Apple's Privacy Policy.</li>
+      <li><strong>Google Gemini API:</strong> Used to perform AI-based analysis of receipt images for data extraction. Receipt images may be transmitted to Google's servers for processing in accordance with Google's API data usage policies.</li>
+      <li><strong>Supabase:</strong> Used as our backend infrastructure for database storage, file storage, and authentication services. Data is stored on Supabase's secure cloud infrastructure.</li>
+    </ul>
+    <p>Each third-party service is subject to its own privacy policy. We encourage you to review their respective policies.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>5. Data Storage and Security</h3>
+    <p>Your data is stored on secure cloud infrastructure provided by Supabase. We implement industry-standard security measures including:</p>
+    <ul>
+      <li>Encryption of data in transit (TLS/HTTPS)</li>
+      <li>Encryption of data at rest</li>
+      <li>Access controls and authentication mechanisms</li>
+      <li>Regular security monitoring and updates</li>
+    </ul>
+    <p>While we strive to protect your information using commercially acceptable means, no method of transmission over the internet or electronic storage is 100% secure. We cannot guarantee absolute security.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>6. Data Retention</h3>
+    <p>We retain your personal data for as long as your account remains active or as needed to provide you with our services. Specific retention practices include:</p>
+    <ul>
+      <li><strong>Receipt images:</strong> Stored until you delete them or close your account.</li>
+      <li><strong>Expense and trip records:</strong> Retained while your account is active.</li>
+      <li><strong>Account data:</strong> Deleted within a reasonable period following account deletion.</li>
+      <li><strong>Usage logs:</strong> Retained for a limited period for operational and diagnostic purposes.</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3>7. User Rights and Data Deletion</h3>
+    <p>Depending on your location, you may have certain rights regarding your personal data, including:</p>
+    <ul>
+      <li><strong>Right to Access:</strong> Request a copy of the personal data we hold about you.</li>
+      <li><strong>Right to Correction:</strong> Request correction of inaccurate or incomplete data.</li>
+      <li><strong>Right to Deletion:</strong> Request deletion of your personal data and account ("Right to be Forgotten").</li>
+      <li><strong>Right to Portability:</strong> Request your data in a portable format.</li>
+      <li><strong>Right to Withdraw Consent:</strong> Withdraw consent to data processing at any time.</li>
+    </ul>
+    <p>To exercise these rights or to request account and data deletion, please contact us at the email address below. We will respond to your request within a reasonable timeframe and in accordance with applicable law.</p>
+    <div class="info-box">
+      You may also delete your account directly within the App settings, which will initiate deletion of your associated data.
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <h3>8. Children's Privacy</h3>
+    <p>Trip Receipt is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately. We will take steps to remove such information and terminate the relevant account.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>9. Changes to This Privacy Policy</h3>
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices or for legal, operational, or regulatory reasons. When we make material changes, we will notify you by:</p>
+    <ul>
+      <li>Updating the "Effective Date" at the top of this policy</li>
+      <li>Sending an in-app notification or email where appropriate</li>
+    </ul>
+    <p>We encourage you to review this policy periodically. Your continued use of the App after any changes constitutes your acceptance of the updated policy.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>10. Contact Information</h3>
+    <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us at:</p>
+    <div class="contact-box">
+      <strong>문의처</strong><br>
+      Email: <a href="mailto:az0856@naver.com">az0856@naver.com</a><br>
+      <small style="color: var(--muted);">We aim to respond to all privacy inquiries within 7 business days.</small>
+    </div>
+  </div>
 </section>
 
-<section data-content="ja" class="hidden">
-  <h1>プライバシーポリシー</h1>
-  <div class="meta">最終更新日: 2025-01-01</div>
+<div class="lang-divider">Language / 언어 / 言語 / ภาษา</div>
 
-  <div class="hr"></div>
-
-  <p>
-    個人開発者 <strong>キム・ソンフン</strong>（以下「運営者」）は、利用者のプライバシーを尊重します。
-    本ポリシーは <strong>Trip Receipt</strong>（以下「本サービス」）に適用されます。
-  </p>
-
-  <h2>1. 収集する情報</h2>
-  <ul>
-    <li><strong>アカウント情報</strong>: Google ログインまたは Apple の「Sign in with Apple」により提供される情報（例：メールアドレス、ユーザー識別子）。提供される項目は設定および利用者の選択により異なる場合があります。</li>
-    <li><strong>ユーザー入力情報</strong>: 支出記録、メモ、場所名など</li>
-    <li><strong>利用情報</strong>: 機能利用履歴、最小範囲のエラーログ</li>
-    <li><strong>端末情報</strong>: OSバージョン、アプリバージョン等</li>
-  </ul>
-
-  <h2>2. 利用目的</h2>
-  <ul>
-    <li>サービス提供およびアカウントに基づくデータ同期</li>
-    <li>品質改善・不具合対応</li>
-    <li>お問い合わせ対応</li>
-    <li><strong>AI 分析機能の提供</strong></li>
-  </ul>
-
-  <h2>3. 保管と処理</h2>
-  <ul>
-    <li>サービス提供のため、利用者が入力した記録（支出/メモ等）はサーバーに保存される場合があります。</li>
-  </ul>
-
-  <h2>4. 外部サービス</h2>
-
-  <h3>4-1. 外部 AI API</h3>
-  <div class="notice">
-    本サービスは、利用者が要求した AI 分析機能を提供するため、利用者が入力したテキスト（例：メモ/記録内容等）を外部 AI API に送信して処理する場合があります。
-    送信する情報は機能提供に必要な最小範囲に限定します。
+<!-- ════════════════════════════════════════
+     KOREAN
+════════════════════════════════════════ -->
+<section class="lang-block" id="ko">
+  <div class="lang-header">
+    <div class="lang-flag">🇰🇷</div>
+    <div class="lang-title-wrap">
+      <h2>개인정보 처리방침</h2>
+      <span>Korean · 한국어</span>
+    </div>
   </div>
 
-  <h3>4-2. 場所検索機能</h3>
-  <div class="notice">
-    本サービスは地図表示なしで、利用者が場所を検索して入力できる機能を提供する場合があり、その際に <strong>Google Places API</strong> 等の外部サービスを利用することがあります。
+  <div class="legal-note">
+    <strong>언어 우선순위:</strong> 본 개인정보 처리방침은 여러 언어로 제공됩니다. 번역본 간에 충돌이나 불일치가 있을 경우, <strong>영문 버전이 우선</strong>하여 적용됩니다.
   </div>
 
-  <h2>5. 削除</h2>
-  <ul>
-    <li>利用者はアプリ内の機能により記録を削除できる場合があります（提供状況はアプリバージョンにより異なります）。</li>
-    <li>目的達成後、適切な方法で削除します。ただし、法令上保管義務がある場合は当該期間保管されることがあります。</li>
-  </ul>
+  <div class="policy-section">
+    <h3>1. 소개</h3>
+    <p><strong>Trip Receipt – Smart Travel Expense Tracker</strong>("앱", "운영자", "우리")를 이용해 주셔서 감사합니다. 운영자는 귀하의 개인정보 보호와 프라이버시 권리를 위해 최선을 다하고 있습니다.</p>
+    <p>본 개인정보 처리방침은 Trip Receipt가 모바일 애플리케이션 이용 시 정보를 어떻게 수집, 이용, 저장, 공유하는지를 설명합니다. 앱을 이용함으로써 귀하는 본 방침에 따른 정보의 수집 및 이용에 동의하게 됩니다.</p>
+    <p>본 방침 또는 운영자의 정보 처리 관행에 관해 궁금한 사항이 있으시면, 아래 연락처로 문의해 주시기 바랍니다.</p>
+  </div>
 
-  <h2>6. お問い合わせ</h2>
-  <p>連絡先: <a href="mailto:az0856@naver.com.app">az0856@naver.com.app</a></p>
+  <div class="policy-section">
+    <h3>2. 수집하는 정보</h3>
+    <p>운영자는 다음과 같은 정보를 수집합니다:</p>
+    <p><strong>계정 정보</strong></p>
+    <ul>
+      <li>이메일 주소 및 계정 식별자 (Google 로그인 또는 Apple로 로그인을 통해)</li>
+      <li>인증 제공업체가 제공한 프로필 이름(해당하는 경우)</li>
+    </ul>
+    <p><strong>영수증 및 지출 데이터</strong></p>
+    <ul>
+      <li>스캔 목적으로 업로드된 영수증 이미지</li>
+      <li>추출된 영수증 데이터 (가맹점명, 날짜, 금액, 통화)</li>
+      <li>귀하가 생성한 여행 지출 내역 및 예산</li>
+      <li>여행 멤버와 공유된 그룹 지출 데이터</li>
+    </ul>
+    <p><strong>기술 및 사용 데이터</strong></p>
+    <ul>
+      <li>기기 유형, 운영체제 및 앱 버전</li>
+      <li>서비스 개선을 위한 사용 로그 및 오류 보고</li>
+      <li>영수증 분석에 따른 AI 처리 입력 및 출력 데이터</li>
+    </ul>
+  </div>
 
-  <div class="footer">© 2025 Trip Receipt. All rights reserved.</div>
+  <div class="policy-section">
+    <h3>3. 정보의 이용 목적</h3>
+    <p>수집된 정보는 다음 목적으로 이용됩니다:</p>
+    <ul>
+      <li><strong>계정 인증:</strong> 귀하의 신원을 확인하고 계정을 안전하게 관리하기 위해.</li>
+      <li><strong>AI 영수증 스캔:</strong> 업로드된 영수증 이미지는 가맹점명, 날짜, 금액 등의 지출 데이터를 추출하기 위한 목적으로만 AI(Google Gemini API)가 처리합니다. 이미지는 광고나 프로파일링에는 사용되지 않습니다.</li>
+      <li><strong>지출 내역 관리:</strong> 여행 지출, 예산 및 환율 환산 내역을 저장하고 정리하기 위해.</li>
+      <li><strong>그룹 지출 공유:</strong> 여행 멤버들과 협력적인 지출 추적 및 정산을 가능하게 하기 위해.</li>
+      <li><strong>데이터 내보내기:</strong> 원하는 형식으로 지출 보고서를 생성하고 내보내기 위해.</li>
+      <li><strong>서비스 개선:</strong> 사용 패턴을 분석하고 버그를 수정하며 앱 성능 및 안정성을 향상시키기 위해.</li>
+    </ul>
+    <div class="info-box">
+      <strong>중요:</strong> 운영자는 귀하의 개인정보를 상업적 또는 마케팅 목적으로 제3자에게 판매, 임대 또는 거래하지 않습니다.
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <h3>4. 제3자 서비스</h3>
+    <p>Trip Receipt는 서비스 제공을 위해 다음 제3자 서비스를 이용합니다:</p>
+    <ul>
+      <li><strong>Google (OAuth):</strong> 계정 인증에 사용. Google의 개인정보 처리방침이 적용됩니다.</li>
+      <li><strong>Apple (Apple로 로그인):</strong> 계정 인증에 사용. Apple의 개인정보 처리방침이 적용됩니다.</li>
+      <li><strong>Google Gemini API:</strong> 영수증 이미지의 AI 기반 분석 및 데이터 추출에 사용. Google의 API 데이터 사용 정책에 따라 영수증 이미지가 Google 서버로 전송될 수 있습니다.</li>
+      <li><strong>Supabase:</strong> 데이터베이스 저장, 파일 저장 및 인증 서비스를 위한 백엔드 인프라로 사용. 데이터는 Supabase의 보안 클라우드 인프라에 저장됩니다.</li>
+    </ul>
+    <p>각 제3자 서비스에는 고유한 개인정보 처리방침이 적용됩니다. 각 제공업체의 방침을 검토하시기를 권장합니다.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>5. 데이터 저장 및 보안</h3>
+    <p>귀하의 데이터는 Supabase가 제공하는 안전한 클라우드 인프라에 저장됩니다. 운영자는 다음을 포함한 업계 표준 보안 조치를 시행합니다:</p>
+    <ul>
+      <li>전송 중 데이터 암호화 (TLS/HTTPS)</li>
+      <li>저장 중 데이터 암호화</li>
+      <li>접근 제어 및 인증 메커니즘</li>
+      <li>정기적인 보안 모니터링 및 업데이트</li>
+    </ul>
+    <p>운영자는 상업적으로 허용 가능한 수단을 사용하여 귀하의 정보를 보호하기 위해 노력하지만, 인터넷을 통한 데이터 전송이나 전자 저장 방법이 100% 안전하다고는 보장할 수 없습니다.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>6. 데이터 보유 기간</h3>
+    <p>운영자는 귀하의 계정이 활성 상태인 동안 또는 서비스 제공에 필요한 기간 동안 개인 데이터를 보유합니다:</p>
+    <ul>
+      <li><strong>영수증 이미지:</strong> 귀하가 삭제하거나 계정을 해지할 때까지 저장.</li>
+      <li><strong>지출 및 여행 기록:</strong> 계정 활성 기간 동안 보유.</li>
+      <li><strong>계정 데이터:</strong> 계정 삭제 후 합리적인 기간 내에 삭제.</li>
+      <li><strong>사용 로그:</strong> 운영 및 진단 목적으로 제한된 기간 동안 보유.</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3>7. 이용자 권리 및 데이터 삭제</h3>
+    <p>귀하의 거주 지역에 따라 개인 데이터에 관한 다음 권리를 가질 수 있습니다:</p>
+    <ul>
+      <li><strong>열람권:</strong> 운영자가 보유한 귀하의 개인 데이터 사본 요청.</li>
+      <li><strong>정정권:</strong> 부정확하거나 불완전한 데이터의 수정 요청.</li>
+      <li><strong>삭제권:</strong> 개인 데이터 및 계정 삭제 요청 ("잊혀질 권리").</li>
+      <li><strong>이동권:</strong> 이동 가능한 형식으로 데이터 요청.</li>
+      <li><strong>동의 철회권:</strong> 언제든지 데이터 처리에 대한 동의 철회.</li>
+    </ul>
+    <p>이러한 권리를 행사하거나 계정 및 데이터 삭제를 요청하려면 아래 이메일로 문의해 주세요. 운영자는 관련 법률에 따라 합리적인 기간 내에 요청에 응답하겠습니다.</p>
+    <div class="info-box">
+      앱 설정에서 계정을 직접 삭제할 수 있으며, 이를 통해 관련 데이터 삭제 절차가 시작됩니다.
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <h3>8. 아동 개인정보 보호</h3>
+    <p>Trip Receipt는 만 13세 미만의 아동을 대상으로 하지 않습니다. 운영자는 만 13세 미만의 아동으로부터 고의적으로 개인정보를 수집하지 않습니다. 귀하가 보호자이며 귀하의 자녀가 운영자에 개인정보를 제공한 것으로 생각된다면 즉시 연락해 주시기 바랍니다. 운영자는 해당 정보를 삭제하고 관련 계정을 해지하는 조치를 취하겠습니다.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>9. 개인정보 처리방침 변경</h3>
+    <p>운영자는 관행의 변경이나 법적, 운영적 또는 규제적 이유로 본 개인정보 처리방침을 수시로 업데이트할 수 있습니다. 중요한 변경이 있을 경우 다음과 같이 알려드립니다:</p>
+    <ul>
+      <li>본 방침 상단의 "시행일" 업데이트</li>
+      <li>적절한 경우 앱 내 알림 또는 이메일 발송</li>
+    </ul>
+    <p>본 방침을 정기적으로 검토하시기를 권장합니다. 변경 이후에도 앱을 계속 이용하면 업데이트된 방침에 동의하는 것으로 간주됩니다.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>10. 연락처</h3>
+    <p>본 개인정보 처리방침 또는 운영자의 데이터 처리 관행에 관해 질문, 우려 사항 또는 요청이 있으시면 아래로 문의해 주세요:</p>
+    <div class="contact-box">
+      <strong>문의처</strong><br>
+      이메일: <a href="mailto:az0856@naver.com">az0856@naver.com</a><br>
+      <small style="color: var(--muted);">모든 개인정보 관련 문의는 영업일 기준 7일 이내에 답변드립니다.</small>
+    </div>
+  </div>
 </section>
 
-<section data-content="en" class="hidden">
-  <h1>Privacy Policy</h1>
-  <div class="meta">Last updated: 2025-01-01</div>
+<div class="lang-divider">Language / 언어 / 言語 / ภาษา</div>
 
-  <div class="hr"></div>
-
-  <p>
-    <strong>Seonghun Kim</strong> (the “Operator”) respects user privacy. This Policy applies to <strong>Trip Receipt</strong> (the “Service”).
-  </p>
-
-  <h2>1. Information We Collect</h2>
-  <ul>
-    <li><strong>Account information</strong>: Information provided via Google Sign-In or Apple “Sign in with Apple” (e.g., email, user identifier). The exact fields may vary depending on provider settings and user choices.</li>
-    <li><strong>User-provided content</strong>: expense entries, notes, place names, and other content you enter</li>
-    <li><strong>Usage data</strong>: feature usage and minimal error logs</li>
-    <li><strong>Device information</strong>: OS version, app version, etc.</li>
-  </ul>
-
-  <h2>2. Purpose of Use</h2>
-  <ul>
-    <li>To provide the Service and synchronize data tied to your account</li>
-    <li>To improve quality and troubleshoot issues</li>
-    <li>To respond to support inquiries</li>
-    <li><strong>To provide AI analysis features</strong></li>
-  </ul>
-
-  <h2>3. Storage</h2>
-  <ul>
-    <li>User-provided content (expense entries/notes, etc.) may be stored on servers to provide the Service and synchronization.</li>
-  </ul>
-
-  <h2>4. Third-Party Services</h2>
-
-  <h3>4-1. External AI API</h3>
-  <div class="notice">
-    To provide AI analysis features you request, the Service may send user-entered text (e.g., notes/entries) to an external AI API for processing.
-    The data sent is limited to the minimum necessary to provide the feature.
+<!-- ════════════════════════════════════════
+     JAPANESE
+════════════════════════════════════════ -->
+<section class="lang-block" id="ja">
+  <div class="lang-header">
+    <div class="lang-flag">🇯🇵</div>
+    <div class="lang-title-wrap">
+      <h2>プライバシーポリシー</h2>
+      <span>Japanese · 日本語</span>
+    </div>
   </div>
 
-  <h3>4-2. Place Search (No Map Display)</h3>
-  <div class="notice">
-    The Service may allow you to search and enter place names without displaying a map, and may use third-party services such as <strong>Google Places API</strong> for this purpose.
+  <div class="legal-note">
+    <strong>言語の優先順位：</strong>本プライバシーポリシーは複数の言語で提供されています。翻訳版間に矛盾または不一致が生じた場合、<strong>英語版が優先</strong>されます。
   </div>
 
-  <h2>5. Deletion</h2>
-  <ul>
-    <li>You may be able to delete your records within the app (availability may vary by app version).</li>
-    <li>We delete personal information when it is no longer needed for the purposes described above, unless retention is required by law.</li>
-  </ul>
+  <div class="policy-section">
+    <h3>1. はじめに</h3>
+    <p><strong>Trip Receipt – スマート旅行経費トラッカー</strong>（以下「本アプリ」「運営者」）をご利用いただきありがとうございます。運営者は、お客様の個人情報の保護とプライバシーの権利を守ることに尽力しています。</p>
+    <p>本プライバシーポリシーは、Trip Receiptが本モバイルアプリケーションのご利用時に、情報をどのように収集・利用・保存・共有するかを説明するものです。本アプリをご利用いただくことで、本ポリシーに従った情報の収集および利用に同意いただいたものとみなします。</p>
+    <p>本ポリシーまたは運営者の個人情報取扱いについてご質問がございましたら、本書末尾のメールアドレスまでお問い合わせください。</p>
+  </div>
 
-  <h2>6. Contact</h2>
-  <p>Email: <a href="mailto:az0856@naver.com.app">az0856@naver.com.app</a></p>
+  <div class="policy-section">
+    <h3>2. 収集する情報</h3>
+    <p>運営者は以下の情報を収集します：</p>
+    <p><strong>アカウント情報</strong></p>
+    <ul>
+      <li>メールアドレスおよびアカウント識別子（Googleログインまたはサインイン with Appleを通じて）</li>
+      <li>認証プロバイダーが提供するプロフィール名（該当する場合）</li>
+    </ul>
+    <p><strong>レシートおよび経費データ</strong></p>
+    <ul>
+      <li>スキャン目的でアップロードされたレシート画像</li>
+      <li>抽出されたレシートデータ（店舗名、日付、金額、通貨）</li>
+      <li>お客様が作成した旅行経費記録および予算</li>
+      <li>旅行メンバーと共有されたグループ経費データ</li>
+    </ul>
+    <p><strong>技術および利用データ</strong></p>
+    <ul>
+      <li>デバイスの種類、OS、アプリバージョン</li>
+      <li>サービス向上のための利用ログおよびクラッシュレポート</li>
+      <li>レシート分析に伴うAI処理の入力・出力データ</li>
+    </ul>
+  </div>
 
-  <div class="footer">© 2025 Trip Receipt. All rights reserved.</div>
+  <div class="policy-section">
+    <h3>3. 情報の利用目的</h3>
+    <p>収集した情報は以下の目的で利用します：</p>
+    <ul>
+      <li><strong>アカウント認証：</strong>お客様の身元確認とアカウントの安全な管理のため。</li>
+      <li><strong>AIレシートスキャン：</strong>アップロードされたレシート画像は、店舗名・日付・金額等の経費データを抽出する目的のみでAI（Google Gemini API）が処理します。広告やプロファイリングには使用しません。</li>
+      <li><strong>経費管理：</strong>旅行の経費、予算、通貨換算を保存・整理するため。</li>
+      <li><strong>グループ経費共有：</strong>旅行メンバーとの協力的な経費管理と精算を実現するため。</li>
+      <li><strong>データエクスポート：</strong>ご希望の形式で経費レポートを生成・出力するため。</li>
+      <li><strong>サービス改善：</strong>利用パターンの分析、バグ修正、アプリのパフォーマンスと信頼性の向上のため。</li>
+    </ul>
+    <div class="info-box">
+      <strong>重要：</strong>運営者は、お客様の個人情報を商業的・マーケティング目的で第三者に販売・貸与・譲渡することはありません。
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <h3>4. 第三者サービス</h3>
+    <p>Trip Receiptは以下の第三者サービスを活用しています：</p>
+    <ul>
+      <li><strong>Google（OAuth）：</strong>アカウント認証に使用。Googleのプライバシーポリシーが適用されます。</li>
+      <li><strong>Apple（サインイン with Apple）：</strong>アカウント認証に使用。Appleのプライバシーポリシーが適用されます。</li>
+      <li><strong>Google Gemini API：</strong>レシート画像のAI分析およびデータ抽出に使用。GoogleのAPIデータ利用ポリシーに従い、レシート画像がGoogleのサーバーに送信される場合があります。</li>
+      <li><strong>Supabase：</strong>データベース・ファイル保存・認証サービスのバックエンドインフラとして使用。データはSupabaseの安全なクラウドインフラに保存されます。</li>
+    </ul>
+    <p>各第三者サービスには固有のプライバシーポリシーが適用されます。各プロバイダーのポリシーをご確認いただくことをお勧めします。</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>5. データの保存とセキュリティ</h3>
+    <p>お客様のデータはSupabaseが提供する安全なクラウドインフラに保存されます。運営者は以下を含む業界標準のセキュリティ対策を実施しています：</p>
+    <ul>
+      <li>通信中のデータ暗号化（TLS/HTTPS）</li>
+      <li>保存データの暗号化</li>
+      <li>アクセス制御および認証メカニズム</li>
+      <li>定期的なセキュリティ監視とアップデート</li>
+    </ul>
+    <p>商業的に許容される手段でお客様の情報を保護するよう努めておりますが、インターネット経由のデータ送信や電子的な保存方法は100%の安全を保証することができません。</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>6. データ保持期間</h3>
+    <p>お客様のアカウントが有効な期間、またはサービス提供に必要な期間、個人データを保持します：</p>
+    <ul>
+      <li><strong>レシート画像：</strong>お客様が削除するかアカウントを解約するまで保存。</li>
+      <li><strong>経費・旅行記録：</strong>アカウント有効期間中保持。</li>
+      <li><strong>アカウントデータ：</strong>アカウント削除後、合理的な期間内に削除。</li>
+      <li><strong>利用ログ：</strong>運用・診断目的で限定的な期間保持。</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3>7. ユーザーの権利とデータ削除</h3>
+    <p>お客様の居住地域によっては、個人データに関して以下の権利を有する場合があります：</p>
+    <ul>
+      <li><strong>アクセス権：</strong>運営者が保有するお客様の個人データのコピーの要求。</li>
+      <li><strong>訂正権：</strong>不正確または不完全なデータの修正要求。</li>
+      <li><strong>削除権：</strong>個人データおよびアカウントの削除要求（「忘れられる権利」）。</li>
+      <li><strong>データポータビリティ権：</strong>移植可能な形式でのデータ要求。</li>
+      <li><strong>同意撤回権：</strong>データ処理への同意をいつでも撤回。</li>
+    </ul>
+    <p>これらの権利を行使する場合、またはアカウント・データの削除を希望される場合は、下記のメールアドレスまでご連絡ください。適用法令に従い、合理的な期間内にご要望にお応えします。</p>
+    <div class="info-box">
+      アプリの設定からアカウントを直接削除することができ、これにより関連データの削除手続きが開始されます。
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <h3>8. 児童のプライバシー</h3>
+    <p>Trip Receiptは13歳未満の児童を対象としていません。運営者は13歳未満の児童から故意に個人情報を収集しません。お子様が運営者に個人情報を提供したと思われる保護者の方は、直ちにご連絡ください。運営者は当該情報を削除し、関連アカウントを解約する措置を取ります。</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>9. プライバシーポリシーの変更</h3>
+    <p>運営者は、慣行の変更や法的・運営上・規制上の理由により、本プライバシーポリシーを随時更新する場合があります。重要な変更がある場合は、以下の方法でお知らせします：</p>
+    <ul>
+      <li>本ポリシー上部の「施行日」の更新</li>
+      <li>必要に応じてアプリ内通知またはメールの送信</li>
+    </ul>
+    <p>本ポリシーを定期的にご確認いただくことをお勧めします。変更後も本アプリを引き続きご利用になることで、更新されたポリシーへの同意とみなします。</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>10. お問い合わせ</h3>
+    <p>本プライバシーポリシーまたは運営者のデータ取扱いについてご質問・ご不明点・ご要望がございましたら、以下までお問い合わせください：</p>
+    <div class="contact-box">
+      <strong>문의처</strong><br>
+      メール：<a href="mailto:az0856@naver.com">az0856@naver.com</a><br>
+      <small style="color: var(--muted);">プライバシーに関するお問い合わせには、営業日7日以内に対応いたします。</small>
+    </div>
+  </div>
 </section>
+
+<div class="lang-divider">Language / 언어 / 言語 / ภาษา</div>
+
+<!-- ════════════════════════════════════════
+     THAI
+════════════════════════════════════════ -->
+<section class="lang-block" id="th">
+  <div class="lang-header">
+    <div class="lang-flag">🇹🇭</div>
+    <div class="lang-title-wrap">
+      <h2>นโยบายความเป็นส่วนตัว</h2>
+      <span>Thai · ภาษาไทย</span>
+    </div>
+  </div>
+
+  <div class="legal-note">
+    <strong>ลำดับความสำคัญของภาษา:</strong> นโยบายความเป็นส่วนตัวนี้มีให้บริการในหลายภาษา หากมีความขัดแย้งหรือความไม่สอดคล้องกันระหว่างฉบับแปล <strong>ฉบับภาษาอังกฤษจะมีผลเหนือกว่า</strong>
+  </div>
+
+  <div class="policy-section">
+    <h3>1. บทนำ</h3>
+    <p>ยินดีต้อนรับสู่ <strong>Trip Receipt – Smart Travel Expense Tracker</strong> ("แอป", "เรา", "ของผู้ดำเนินการ") เราให้ความสำคัญกับการปกป้องข้อมูลส่วนบุคคลและสิทธิ์ความเป็นส่วนตัวของคุณ</p>
+    <p>นโยบายความเป็นส่วนตัวนี้อธิบายวิธีที่ Trip Receipt รวบรวม ใช้ จัดเก็บ และแบ่งปันข้อมูลเมื่อคุณใช้แอปพลิเคชันมือถือของผู้ดำเนินการ การใช้แอปถือว่าคุณยินยอมให้มีการรวบรวมและใช้ข้อมูลตามนโยบายนี้</p>
+    <p>หากมีคำถามหรือข้อกังวลเกี่ยวกับนโยบายนี้ กรุณาติดต่อผู้ดำเนินการที่อีเมลที่ระบุไว้ท้ายเอกสารนี้</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>2. ข้อมูลที่เรารวบรวม</h3>
+    <p>เรารวบรวมข้อมูลประเภทต่อไปนี้:</p>
+    <p><strong>ข้อมูลบัญชี</strong></p>
+    <ul>
+      <li>ที่อยู่อีเมลและตัวระบุบัญชี (ผ่าน Google Login หรือ Sign in with Apple)</li>
+      <li>ชื่อโปรไฟล์ที่ผู้ให้บริการการยืนยันตัวตนมอบให้ (หากมี)</li>
+    </ul>
+    <p><strong>ข้อมูลใบเสร็จและค่าใช้จ่าย</strong></p>
+    <ul>
+      <li>รูปภาพใบเสร็จที่อัปโหลดเพื่อวัตถุประสงค์ในการสแกน</li>
+      <li>ข้อมูลใบเสร็จที่ดึงออกมา (ชื่อร้าน, วันที่, จำนวนเงิน, สกุลเงิน)</li>
+      <li>บันทึกค่าใช้จ่ายและงบประมาณการเดินทางที่คุณสร้าง</li>
+      <li>ข้อมูลค่าใช้จ่ายกลุ่มที่แบ่งปันกับสมาชิกในทริป</li>
+    </ul>
+    <p><strong>ข้อมูลทางเทคนิคและการใช้งาน</strong></p>
+    <ul>
+      <li>ประเภทอุปกรณ์, ระบบปฏิบัติการ และเวอร์ชันแอป</li>
+      <li>บันทึกการใช้งานและรายงานข้อผิดพลาดเพื่อปรับปรุงบริการ</li>
+      <li>ข้อมูลนำเข้าและผลลัพธ์จากการประมวลผล AI ในการวิเคราะห์ใบเสร็จ</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3>3. วิธีที่ผู้ดำเนินการใช้ข้อมูลของคุณ</h3>
+    <p>ผู้ดำเนินการใช้ข้อมูลที่รวบรวมเพื่อวัตถุประสงค์ต่อไปนี้:</p>
+    <ul>
+      <li><strong>การยืนยันตัวตนบัญชี:</strong> เพื่อตรวจสอบตัวตนของคุณและจัดการบัญชีอย่างปลอดภัย</li>
+      <li><strong>การสแกนใบเสร็จด้วย AI:</strong> รูปภาพใบเสร็จที่อัปโหลดจะถูกประมวลผลโดย AI (Google Gemini API) เพื่อดึงข้อมูลค่าใช้จ่าย เช่น ชื่อร้าน วันที่ และจำนวนเงินเท่านั้น รูปภาพไม่ถูกใช้เพื่อโฆษณาหรือการสร้างโปรไฟล์</li>
+      <li><strong>การติดตามและจัดการค่าใช้จ่าย:</strong> เพื่อจัดเก็บและจัดระเบียบค่าใช้จ่ายการเดินทาง งบประมาณ และการแปลงสกุลเงิน</li>
+      <li><strong>การแบ่งปันค่าใช้จ่ายกลุ่ม:</strong> เพื่อให้สามารถติดตามค่าใช้จ่ายและชำระหนี้ร่วมกับสมาชิกในทริปได้</li>
+      <li><strong>การส่งออกข้อมูล:</strong> เพื่อสร้างและส่งออกรายงานค่าใช้จ่ายในรูปแบบที่คุณต้องการ</li>
+      <li><strong>การปรับปรุงบริการ:</strong> เพื่อวิเคราะห์รูปแบบการใช้งาน แก้ไขข้อบกพร่อง และพัฒนาประสิทธิภาพของแอป</li>
+    </ul>
+    <div class="info-box">
+      <strong>สำคัญ:</strong> ผู้ดำเนินการไม่ขาย ให้เช่า หรือแลกเปลี่ยนข้อมูลส่วนบุคคลของคุณกับบุคคลที่สามเพื่อวัตถุประสงค์เชิงพาณิชย์หรือการตลาด
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <h3>4. บริการของบุคคลที่สาม</h3>
+    <p>Trip Receipt ใช้บริการบุคคลที่สามดังต่อไปนี้เพื่อให้บริการ:</p>
+    <ul>
+      <li><strong>Google (OAuth):</strong> ใช้สำหรับการยืนยันตัวตนบัญชี อยู่ภายใต้นโยบายความเป็นส่วนตัวของ Google</li>
+      <li><strong>Apple (Sign in with Apple):</strong> ใช้สำหรับการยืนยันตัวตนบัญชี อยู่ภายใต้นโยบายความเป็นส่วนตัวของ Apple</li>
+      <li><strong>Google Gemini API:</strong> ใช้สำหรับการวิเคราะห์รูปภาพใบเสร็จด้วย AI และการดึงข้อมูล รูปภาพใบเสร็จอาจถูกส่งไปยังเซิร์ฟเวอร์ของ Google เพื่อการประมวลผลตามนโยบายการใช้ข้อมูล API ของ Google</li>
+      <li><strong>Supabase:</strong> ใช้เป็นโครงสร้างพื้นฐานแบ็กเอนด์สำหรับการจัดเก็บฐานข้อมูล ไฟล์ และบริการยืนยันตัวตน ข้อมูลถูกจัดเก็บบนโครงสร้างพื้นฐานคลาวด์ที่ปลอดภัยของ Supabase</li>
+    </ul>
+    <p>บริการบุคคลที่สามแต่ละรายมีนโยบายความเป็นส่วนตัวของตนเอง ผู้ดำเนินการแนะนำให้คุณตรวจสอบนโยบายของผู้ให้บริการแต่ละราย</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>5. การจัดเก็บข้อมูลและความปลอดภัย</h3>
+    <p>ข้อมูลของคุณถูกจัดเก็บบนโครงสร้างพื้นฐานคลาวด์ที่ปลอดภัยโดย Supabase ผู้ดำเนินการใช้มาตรการรักษาความปลอดภัยมาตรฐานอุตสาหกรรม รวมถึง:</p>
+    <ul>
+      <li>การเข้ารหัสข้อมูลระหว่างการส่ง (TLS/HTTPS)</li>
+      <li>การเข้ารหัสข้อมูลที่จัดเก็บ</li>
+      <li>การควบคุมการเข้าถึงและกลไกการยืนยันตัวตน</li>
+      <li>การตรวจสอบและอัปเดตความปลอดภัยเป็นประจำ</li>
+    </ul>
+    <p>แม้ผู้ดำเนินการจะพยายามปกป้องข้อมูลของคุณด้วยวิธีการที่ยอมรับได้ในเชิงพาณิชย์ แต่ไม่มีวิธีการส่งข้อมูลผ่านอินเทอร์เน็ตหรือการจัดเก็บข้อมูลอิเล็กทรอนิกส์ใดที่ปลอดภัย 100%</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>6. ระยะเวลาการเก็บข้อมูล</h3>
+    <p>ผู้ดำเนินการเก็บรักษาข้อมูลส่วนบุคคลของคุณตราบเท่าที่บัญชีของคุณยังใช้งานอยู่หรือตามที่จำเป็นในการให้บริการ:</p>
+    <ul>
+      <li><strong>รูปภาพใบเสร็จ:</strong> จัดเก็บจนกว่าคุณจะลบหรือปิดบัญชี</li>
+      <li><strong>บันทึกค่าใช้จ่ายและการเดินทาง:</strong> เก็บรักษาในช่วงที่บัญชีใช้งานอยู่</li>
+      <li><strong>ข้อมูลบัญชี:</strong> ลบภายในระยะเวลาที่เหมาะสมหลังจากลบบัญชี</li>
+      <li><strong>บันทึกการใช้งาน:</strong> เก็บรักษาในระยะเวลาจำกัดเพื่อวัตถุประสงค์การดำเนินงานและการวินิจฉัย</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3>7. สิทธิ์ของผู้ใช้และการลบข้อมูล</h3>
+    <p>ขึ้นอยู่กับที่ตั้งของคุณ คุณอาจมีสิทธิ์บางประการเกี่ยวกับข้อมูลส่วนบุคคลของคุณ ได้แก่:</p>
+    <ul>
+      <li><strong>สิทธิ์ในการเข้าถึง:</strong> ขอสำเนาข้อมูลส่วนบุคคลที่ผู้ดำเนินการเก็บเกี่ยวกับคุณ</li>
+      <li><strong>สิทธิ์ในการแก้ไข:</strong> ขอแก้ไขข้อมูลที่ไม่ถูกต้องหรือไม่สมบูรณ์</li>
+      <li><strong>สิทธิ์ในการลบ:</strong> ขอลบข้อมูลส่วนบุคคลและบัญชีของคุณ ("สิทธิ์ที่จะถูกลืม")</li>
+      <li><strong>สิทธิ์ในการพกพาข้อมูล:</strong> ขอข้อมูลของคุณในรูปแบบที่พกพาได้</li>
+      <li><strong>สิทธิ์ในการถอนความยินยอม:</strong> ถอนความยินยอมในการประมวลผลข้อมูลได้ทุกเมื่อ</li>
+    </ul>
+    <p>เพื่อใช้สิทธิ์เหล่านี้หรือขอลบบัญชีและข้อมูล กรุณาติดต่อผู้ดำเนินการที่อีเมลด้านล่าง ผู้ดำเนินการจะตอบสนองต่อคำขอของคุณภายในระยะเวลาที่เหมาะสมตามกฎหมายที่บังคับใช้</p>
+    <div class="info-box">
+      คุณสามารถลบบัญชีของคุณได้โดยตรงในการตั้งค่าแอป ซึ่งจะเริ่มต้นกระบวนการลบข้อมูลที่เกี่ยวข้อง
+    </div>
+  </div>
+
+  <div class="policy-section">
+    <h3>8. ความเป็นส่วนตัวของเด็ก</h3>
+    <p>Trip Receipt ไม่ได้มุ่งเป้าหมายไปที่เด็กอายุต่ำกว่า 13 ปี ผู้ดำเนินการไม่รวบรวมข้อมูลส่วนบุคคลจากเด็กอายุต่ำกว่า 13 ปีโดยเจตนา หากคุณเป็นผู้ปกครองและเชื่อว่าบุตรหลานของคุณได้ให้ข้อมูลส่วนบุคคลแก่ผู้ดำเนินการ กรุณาติดต่อผู้ดำเนินการทันที ผู้ดำเนินการจะดำเนินการลบข้อมูลดังกล่าวและยุติบัญชีที่เกี่ยวข้อง</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>9. การเปลี่ยนแปลงนโยบายความเป็นส่วนตัว</h3>
+    <p>ผู้ดำเนินการอาจอัปเดตนโยบายความเป็นส่วนตัวนี้เป็นครั้งคราวเพื่อสะท้อนการเปลี่ยนแปลงในแนวปฏิบัติหรือด้วยเหตุผลทางกฎหมาย การดำเนินงาน หรือกฎระเบียบ เมื่อมีการเปลี่ยนแปลงที่สำคัญ ผู้ดำเนินการจะแจ้งให้คุณทราบโดย:</p>
+    <ul>
+      <li>อัปเดต "วันที่มีผลบังคับใช้" ที่ด้านบนของนโยบายนี้</li>
+      <li>ส่งการแจ้งเตือนในแอปหรืออีเมลตามความเหมาะสม</li>
+    </ul>
+    <p>ผู้ดำเนินการแนะนำให้คุณตรวจสอบนโยบายนี้เป็นระยะ การที่คุณยังคงใช้แอปต่อไปหลังจากมีการเปลี่ยนแปลงใดๆ ถือว่าคุณยอมรับนโยบายที่อัปเดตแล้ว</p>
+  </div>
+
+  <div class="policy-section">
+    <h3>10. ข้อมูลติดต่อ</h3>
+    <p>หากคุณมีคำถาม ข้อกังวล หรือคำขอเกี่ยวกับนโยบายความเป็นส่วนตัวนี้หรือแนวปฏิบัติด้านข้อมูลของผู้ดำเนินการ กรุณาติดต่อผู้ดำเนินการที่:</p>
+    <div class="contact-box">
+      <strong>문의처</strong><br>
+      อีเมล: <a href="mailto:az0856@naver.com">az0856@naver.com</a><br>
+      <small style="color: var(--muted);">ผู้ดำเนินการตั้งเป้าที่จะตอบสนองต่อการสอบถามด้านความเป็นส่วนตัวทั้งหมดภายใน 7 วันทำการ</small>
+    </div>
+  </div>
+</section>
+
+</div><!-- /container -->
+</main>
+
+<footer>
+  <strong>Trip Receipt – Smart Travel Expense Tracker</strong><br>
+  Privacy Policy · v1.0 (Effective 2026-03-04)<br>
+  <span style="font-size: 11px; opacity: 0.6;">© 2025 Trip Receipt. All rights reserved. · In case of conflict between language versions, the English version prevails.</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-de
