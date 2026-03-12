@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,7 +29,22 @@
       .wrap {
         max-width: 760px;
         margin: 0 auto;
-        padding: 48px 20px 64px;
+        padding: 32px 20px 64px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+      }
+
+      .lang-select {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 10px 12px;
+        font-size: 14px;
+        background: white;
+        color: var(--text);
       }
 
       .hero {
@@ -111,56 +126,58 @@
   </head>
   <body>
     <main class="wrap">
+      <div class="topbar">
+        <select id="languageSelect" class="lang-select" aria-label="Language">
+          <option value="en">English</option>
+          <option value="ko">한국어</option>
+          <option value="ja">日本語</option>
+          <option value="zh-CN">简体中文</option>
+          <option value="zh-TW">繁體中文</option>
+        </select>
+      </div>
+
       <section class="hero">
-        <h1>Spilt Receipt Support</h1>
-        <p class="lead">
-          Spilt Receipt support page. If you have questions about sign-in,
-          receipt scanning, expense records, account deletion, or billing,
-          please contact us by email.
-        </p>
+        <h1 data-i18n="title">Spilt Receipt Support</h1>
+        <p class="lead" data-i18n="lead"></p>
       </section>
 
       <section class="card">
-        <h2>Contact</h2>
-        <p>
-          We currently provide support by email. Please include your app version,
-          device model, and a short description of the issue so we can help you
-          faster.
-        </p>
+        <h2 data-i18n="contactTitle"></h2>
+        <p data-i18n="contactBody"></p>
         <a class="mail" href="mailto:az0856@naver.com">az0856@naver.com</a>
       </section>
 
       <section class="card">
-        <h2>What to include in your message</h2>
+        <h2 data-i18n="includeTitle"></h2>
         <ul>
-          <li>Your question or issue summary</li>
-          <li>Device model and iOS version</li>
-          <li>App version and build number</li>
-          <li>Screenshots if the problem is visible on screen</li>
+          <li data-i18n="include1"></li>
+          <li data-i18n="include2"></li>
+          <li data-i18n="include3"></li>
+          <li data-i18n="include4"></li>
         </ul>
       </section>
 
       <section class="card">
-        <h2>Common help topics</h2>
+        <h2 data-i18n="topicsTitle"></h2>
         <ul>
-          <li>Apple sign-in or login callback issues</li>
-          <li>Receipt image upload, review, or deletion issues</li>
-          <li>Trip expense records and settlement questions</li>
-          <li>Account deletion and data removal requests</li>
+          <li data-i18n="topic1"></li>
+          <li data-i18n="topic2"></li>
+          <li data-i18n="topic3"></li>
+          <li data-i18n="topic4"></li>
         </ul>
       </section>
 
       <section class="card">
-        <h2>Legal</h2>
+        <h2 data-i18n="legalTitle"></h2>
         <div class="meta">
           <div>
-            Terms of Service:
+            <span data-i18n="termsLabel"></span>
             <a href="https://sunghkim98.github.io/legal_site/terms/">
               https://sunghkim98.github.io/legal_site/terms/
             </a>
           </div>
           <div>
-            Privacy Policy:
+            <span data-i18n="privacyLabel"></span>
             <a href="https://sunghkim98.github.io/legal_site/privacy/">
               https://sunghkim98.github.io/legal_site/privacy/
             </a>
@@ -168,7 +185,152 @@
         </div>
       </section>
 
-      <p class="footer">Last updated: 2026-03-12</p>
+      <p class="footer"><span data-i18n="updated"></span> 2026-03-12</p>
     </main>
+
+    <script>
+      const translations = {
+        en: {
+          title: 'Spilt Receipt Support',
+          lead:
+            'Spilt Receipt support page. If you have questions about sign-in, receipt scanning, expense records, account deletion, or billing, please contact us by email.',
+          contactTitle: 'Contact',
+          contactBody:
+            'We currently provide support by email. Please include your app version, device model, and a short description of the issue so we can help you faster.',
+          includeTitle: 'What to include in your message',
+          include1: 'Your question or issue summary',
+          include2: 'Device model and iOS version',
+          include3: 'App version and build number',
+          include4: 'Screenshots if the problem is visible on screen',
+          topicsTitle: 'Common help topics',
+          topic1: 'Apple sign-in or login callback issues',
+          topic2: 'Receipt image upload, review, or deletion issues',
+          topic3: 'Trip expense records and settlement questions',
+          topic4: 'Account deletion and data removal requests',
+          legalTitle: 'Legal',
+          termsLabel: 'Terms of Service: ',
+          privacyLabel: 'Privacy Policy: ',
+          updated: 'Last updated:'
+        },
+        ko: {
+          title: 'Spilt Receipt 고객지원',
+          lead:
+            'Spilt Receipt 지원 페이지입니다. 로그인, 영수증 스캔, 지출 기록, 계정 삭제, 결제 관련 문의가 있으시면 이메일로 연락해주세요.',
+          contactTitle: '문의하기',
+          contactBody:
+            '현재 이메일로 지원을 제공하고 있습니다. 앱 버전, 기기 모델, 문제 내용을 함께 보내주시면 더 빠르게 도와드릴 수 있습니다.',
+          includeTitle: '문의 시 함께 보내주세요',
+          include1: '문의 내용 또는 문제 요약',
+          include2: '기기 모델과 iOS 버전',
+          include3: '앱 버전과 빌드 번호',
+          include4: '문제가 화면에 보인다면 스크린샷',
+          topicsTitle: '자주 문의하는 항목',
+          topic1: 'Apple 로그인 또는 로그인 복귀 문제',
+          topic2: '영수증 이미지 업로드, 확인, 삭제 문제',
+          topic3: '여행 지출 기록 및 정산 관련 문의',
+          topic4: '계정 삭제 및 데이터 삭제 요청',
+          legalTitle: '법적 문서',
+          termsLabel: '이용약관: ',
+          privacyLabel: '개인정보처리방침: ',
+          updated: '최종 업데이트:'
+        },
+        ja: {
+          title: 'Spilt Receipt サポート',
+          lead:
+            'Spilt Receipt のサポートページです。ログイン、レシートスキャン、支出記録、アカウント削除、課金に関するお問い合わせはメールでご連絡ください。',
+          contactTitle: 'お問い合わせ',
+          contactBody:
+            '現在、サポートはメールでご案内しています。アプリのバージョン、端末機種、問題の内容を一緒にお送りいただくと、より早くご案内できます。',
+          includeTitle: 'お問い合わせに含めてください',
+          include1: 'ご質問または問題の概要',
+          include2: '端末機種と iOS バージョン',
+          include3: 'アプリのバージョンとビルド番号',
+          include4: '問題が画面に表示されている場合はスクリーンショット',
+          topicsTitle: 'よくあるお問い合わせ',
+          topic1: 'Apple サインインやログイン復帰の問題',
+          topic2: 'レシート画像のアップロード、確認、削除の問題',
+          topic3: '旅行支出の記録や精算に関する質問',
+          topic4: 'アカウント削除やデータ削除の依頼',
+          legalTitle: '法的情報',
+          termsLabel: '利用規約: ',
+          privacyLabel: 'プライバシーポリシー: ',
+          updated: '最終更新:'
+        },
+        'zh-CN': {
+          title: 'Spilt Receipt 支持',
+          lead:
+            '这是 Spilt Receipt 的支持页面。如果你对登录、收据扫描、支出记录、账号删除或订阅有疑问，请通过电子邮件联系我们。',
+          contactTitle: '联系我们',
+          contactBody:
+            '我们目前通过电子邮件提供支持。请附上应用版本、设备型号以及问题简述，以便我们更快帮助你。',
+          includeTitle: '邮件中建议包含',
+          include1: '问题或咨询摘要',
+          include2: '设备型号和 iOS 版本',
+          include3: '应用版本和构建号',
+          include4: '如果问题可见，请附上截图',
+          topicsTitle: '常见支持主题',
+          topic1: 'Apple 登录或登录回跳问题',
+          topic2: '收据图片上传、查看或删除问题',
+          topic3: '旅行支出记录和结算相关问题',
+          topic4: '账号删除和数据删除请求',
+          legalTitle: '法律信息',
+          termsLabel: '服务条款：',
+          privacyLabel: '隐私政策：',
+          updated: '最后更新：'
+        },
+        'zh-TW': {
+          title: 'Spilt Receipt 支援',
+          lead:
+            '這是 Spilt Receipt 的支援頁面。如果你對登入、收據掃描、支出紀錄、帳號刪除或訂閱有問題，請透過電子郵件與我們聯絡。',
+          contactTitle: '聯絡我們',
+          contactBody:
+            '目前我們透過電子郵件提供支援。請附上 App 版本、裝置型號以及問題說明，以便我們更快協助你。',
+          includeTitle: '建議在郵件中附上',
+          include1: '問題或詢問摘要',
+          include2: '裝置型號與 iOS 版本',
+          include3: 'App 版本與建置號碼',
+          include4: '若問題可在畫面中看到，請附上截圖',
+          topicsTitle: '常見支援主題',
+          topic1: 'Apple 登入或登入返回 App 的問題',
+          topic2: '收據圖片上傳、檢視或刪除問題',
+          topic3: '旅行支出紀錄與結算相關問題',
+          topic4: '帳號刪除與資料刪除申請',
+          legalTitle: '法律資訊',
+          termsLabel: '服務條款：',
+          privacyLabel: '隱私權政策：',
+          updated: '最後更新：'
+        }
+      };
+
+      function applyLanguage(lang) {
+        const content = translations[lang] || translations.en;
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-i18n]').forEach((node) => {
+          const key = node.getAttribute('data-i18n');
+          if (content[key]) {
+            node.textContent = content[key];
+          }
+        });
+        localStorage.setItem('support-lang', lang);
+      }
+
+      const select = document.getElementById('languageSelect');
+      const browserLang = navigator.language || 'en';
+      const initialLang =
+        localStorage.getItem('support-lang') ||
+        (translations[browserLang] ? browserLang : browserLang.startsWith('ko')
+          ? 'ko'
+          : browserLang.startsWith('ja')
+            ? 'ja'
+            : browserLang.toLowerCase().startsWith('zh-tw')
+              ? 'zh-TW'
+              : browserLang.toLowerCase().startsWith('zh')
+                ? 'zh-CN'
+                : 'en');
+
+      select.value = initialLang;
+      applyLanguage(initialLang);
+      select.addEventListener('change', (event) => applyLanguage(event.target.value));
+    </script>
   </body>
 </html>
