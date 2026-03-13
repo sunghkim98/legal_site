@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spilt Receipt – Travel Receipt Scanning & Expense Tracking</title>
+  <meta name="description" content="Capture and upload travel receipts, review extracted details, and manage shared expenses by trip. Simple, clean, and built for travelers." />
+  <meta property="og:title" content="Spilt Receipt – Travel Receipt Scanning & Expense Tracking" />
+  <meta property="og:description" content="Capture receipts, track expenses by trip, and manage shared costs with your travel companions." />
+  <meta property="og:type" content="website" />
+  <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-deep:   #1a3a5c;
+      --blue-mid:    #2563a8;
+      --blue-light:  #4a90d9;
+      --blue-pale:   #e8f1fb;
+      --blue-accent: #3b82f6;
+      --sand:        #faf8f5;
+      --sand-dark:   #f0ece4;
+      --ink:         #1a1a2e;
+      --ink-soft:    #3d3d5c;
+      --muted:       #7a849a;
+      --white:       #ffffff;
+      --radius:      16px;
+      --radius-sm:   10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--sand);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5vw;
+      height: 64px;
+      background: rgba(250, 248, 245, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(37, 99, 168, 0.08);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 34px; height: 34px;
+      background: var(--blue-mid);
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+    }
+
+    .nav-logo-icon svg { width: 18px; height: 18px; }
+
+    .nav-logo-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--blue-deep);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--blue-mid); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 100px 5vw 80px;
+      text-align: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 50% -10%, rgba(37, 99, 168, 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 80%, rgba(74, 144, 217, 0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 5px 14px;
+      background: var(--blue-pale);
+      color: var(--blue-mid);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      color: var(--blue-deep);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--blue-mid);
+    }
+
+    .hero-sub {
+      max-width: 520px;
+      margin: 0 auto 36px;
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      font-weight: 300;
+    }
+
+    .btn-store {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--blue-deep);
+      color: var(--white);
+      border-radius: 14px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-store:hover {
+      background: var(--blue-mid);
+      transform: translateY(-1px);
+    }
+
+    .btn-store svg { width: 20px; height: 20px; }
+
+    /* ── MOCKUP STRIP ── */
+    .mockup-strip {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 56px;
+      overflow: hidden;
+    }
+
+    .phone-mock {
+      width: 160px;
+      height: 280px;
+      background: var(--white);
+      border-radius: 26px;
+      border: 1.5px solid rgba(37, 99, 168, 0.14);
+      box-shadow: 0 8px 32px rgba(26, 58, 92, 0.10), 0 2px 8px rgba(26, 58, 92, 0.06);
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .phone-mock.center {
+      width: 180px;
+      height: 316px;
+      margin-top: -18px;
+      box-shadow: 0 16px 48px rgba(26, 58, 92, 0.16), 0 4px 12px rgba(26, 58, 92, 0.08);
+    }
+
+    .phone-screen {
+      width: 100%; height: 100%;
+      padding: 16px 12px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mock-topbar {
+      height: 14px;
+      background: var(--blue-pale);
+      border-radius: 6px;
+      width: 60%;
+    }
+
+    .mock-receipt {
+      flex: 1;
+      background: linear-gradient(135deg, var(--blue-pale) 0%, #fff 100%);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      gap: 6px;
+    }
+
+    .mock-line {
+      height: 7px;
+      background: rgba(37, 99, 168, 0.15);
+      border-radius: 4px;
+    }
+
+    .mock-line.short { width: 55%; }
+    .mock-line.medium { width: 75%; }
+    .mock-line.long { width: 90%; }
+    .mock-line.accent { background: var(--blue-accent); opacity: 0.4; }
+
+    .mock-amount {
+      margin-top: auto;
+      height: 22px;
+      background: var(--blue-mid);
+      border-radius: 6px;
+      opacity: 0.85;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      padding: 80px 5vw;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-mid);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--blue-deep);
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      margin-bottom: 14px;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 520px;
+      font-weight: 300;
+    }
+
+    /* ── FEATURES GRID ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      margin-top: 48px;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border: 1px solid rgba(37, 99, 168, 0.09);
+      border-radius: var(--radius);
+      padding: 28px 26px;
+      transition: box-shadow 0.22s, transform 0.18s;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 8px 28px rgba(26, 58, 92, 0.10);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 44px; height: 44px;
+      background: var(--blue-pale);
+      border-radius: var(--radius-sm);
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+    }
+
+    .feature-icon svg { width: 22px; height: 22px; color: var(--blue-mid); }
+
+    .feature-title {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 7px;
+    }
+
+    .feature-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.55;
+      font-weight: 300;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-wrapper {
+      background: var(--blue-deep);
+      padding: 80px 5vw;
+    }
+
+    .how-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .how-wrapper .section-label { color: var(--blue-light); }
+    .how-wrapper .section-title { color: var(--white); }
+    .how-wrapper .section-desc { color: rgba(255,255,255,0.55); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .step {
+      position: relative;
+      padding: 28px 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: var(--radius);
+    }
+
+    .step-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.8rem;
+      color: rgba(74,144,217,0.30);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .step-title {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.55;
+      font-weight: 300;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 80px 5vw;
+      text-align: center;
+    }
+
+    .cta-box {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--white);
+      border: 1px solid rgba(37,99,168,0.10);
+      border-radius: 24px;
+      padding: 52px 40px;
+      box-shadow: 0 4px 24px rgba(26,58,92,0.07);
+    }
+
+    .cta-box .section-title { margin-bottom: 12px; }
+    .cta-box .section-desc { margin: 0 auto 32px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid rgba(37,99,168,0.08);
+      padding: 36px 5vw;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem;
+      color: var(--blue-deep);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--blue-mid); }
+
+    .footer-copy {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(37,99,168,0.07);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 72px 20px 60px; }
+      .phone-mock { width: 130px; height: 224px; }
+      .phone-mock.center { width: 148px; height: 254px; margin-top: -14px; }
+      .section { padding: 60px 20px; }
+      .how-wrapper { padding: 60px 20px; }
+      .cta-section { padding: 60px 20px; }
+      .cta-box { padding: 36px 24px; }
+      footer { padding: 28px 20px; }
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow { animation: fadeUp 0.5s ease both; }
+    .hero h1      { animation: fadeUp 0.55s 0.08s ease both; }
+    .hero-sub     { animation: fadeUp 0.55s 0.15s ease both; }
+    .btn-store    { animation: fadeUp 0.55s 0.22s ease both; }
+    .mockup-strip { animation: fadeUp 0.6s 0.35s ease both; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="3" width="13" height="17" rx="2" fill="white" opacity="0.9"/>
+        <path d="M7 8h7M7 11h5M7 14h4" stroke="#2563a8" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="17" cy="17" r="4" fill="#4a90d9"/>
+        <path d="M15.5 17h3M17 15.5v3" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="nav-logo-text">Spilt Receipt</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#support">Support</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-eyebrow">Available on iOS</div>
+  <h1>Travel receipts,<br /><em>finally organized.</em></h1>
+  <p class="hero-sub">Capture receipts on the go, review the details, and keep every trip's expenses in one tidy place — including shared costs with your travel companions.</p>
+  <a href="#" class="btn-store">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+    Download on the App Store
+  </a>
+
+  <!-- phone mockups -->
+  <div class="mockup-strip">
+    <div class="phone-mock">
+      <div class="phone-screen">
+        <div class="mock-topbar"></div>
+        <div class="mock-receipt">
+          <div class="mock-line long"></div>
+          <div class="mock-line medium"></div>
+          <div class="mock-line short"></div>
+          <div class="mock-line long"></div>
+          <div class="mock-line medium"></div>
+          <div class="mock-amount"></div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-mock center">
+      <div class="phone-screen">
+        <div class="mock-topbar" style="width:75%"></div>
+        <div class="mock-receipt">
+          <div class="mock-line long accent"></div>
+          <div class="mock-line medium"></div>
+          <div class="mock-line long"></div>
+          <div class="mock-line short"></div>
+          <div class="mock-line medium"></div>
+          <div class="mock-line long"></div>
+          <div class="mock-line short"></div>
+          <div class="mock-amount"></div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-mock">
+      <div class="phone-screen">
+        <div class="mock-topbar" style="width:50%"></div>
+        <div class="mock-receipt">
+          <div class="mock-line medium"></div>
+          <div class="mock-line long"></div>
+          <div class="mock-line short"></div>
+          <div class="mock-line medium"></div>
+          <div class="mock-line long"></div>
+          <div class="mock-amount"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="section" id="features">
+  <div class="section-label">Features</div>
+  <h2 class="section-title">Everything you need<br />for travel expenses</h2>
+  <p class="section-desc">No complicated setups. Just scan, review, and move on with your trip.</p>
+
+  <div class="features-grid">
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+          <circle cx="12" cy="13" r="4"/>
+        </svg>
+      </div>
+      <div class="feature-title">Capture or Upload Receipts</div>
+      <div class="feature-desc">Take a photo right after paying, or upload an image from your library. Receipts are stored alongside their extracted details.</div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        </svg>
+      </div>
+      <div class="feature-title">Review & Edit Details</div>
+      <div class="feature-desc">Check the extracted amount, date, and category. Make corrections easily before saving — so your records stay accurate.</div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <path d="M8 21h8M12 17v4"/>
+        </svg>
+      </div>
+      <div class="feature-title">Organize by Trip</div>
+      <div class="feature-desc">Group expenses under each trip so you always know how much you spent in Tokyo, Paris, or anywhere else.</div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <div class="feature-title">Shared Travel Spending</div>
+      <div class="feature-desc">Track who paid what and manage costs with your travel companions — all in one place, without the mental math.</div>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <path d="M3 9h18M9 21V9"/>
+        </svg>
+      </div>
+      <div class="feature-title">Receipt Image Storage</div>
+      <div class="feature-desc">Every receipt image is kept with its record. Refer back to the original anytime — useful for reimbursements or expense reports.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<div class="how-wrapper" id="how">
+  <div class="how-inner">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Three steps,<br />zero hassle</h2>
+    <p class="section-desc">Designed to fit naturally into how you travel — not the other way around.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Capture or Upload</div>
+        <div class="step-desc">Take a photo of your receipt on the spot, or choose an existing image from your library.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Review & Confirm</div>
+        <div class="step-desc">Check the extracted details and make any edits before saving. Your data stays accurate.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Save & Manage</div>
+        <div class="step-desc">Receipts are organized by trip. View totals, manage shared costs, and access images anytime.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="cta-box">
+    <div class="section-label" style="text-align:center">Get the app</div>
+    <h2 class="section-title">Start tracking your<br />travel expenses today</h2>
+    <p class="section-desc" style="text-align:center">Available free on the App Store. No account required to get started.</p>
+    <a href="#" class="btn-store">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download on the App Store
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer id="support">
+  <div class="footer-inner">
+    <div class="footer-brand">Spilt Receipt</div>
+    <ul class="footer-links">
+      <li><a href="https://sunghkim98.github.io/legal_site/support/">Support</a></li>
+      <li><a href="https://sunghkim98.github.io/legal_site/terms/">Terms of Service</a></li>
+      <li><a href="https://sunghkim98.github.io/legal_site/privacy/">Privacy Policy</a></li>
+      <li><a href="mailto:az0856@naver.com">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-inner footer-copy">
+    © 2025 Spilt Receipt. All rights reserved. &nbsp;·&nbsp; Questions? <a href="mailto:az0856@naver.com" style="color:var(--blue-mid);text-decoration:none;">az0856@naver.com</a>
+  </div>
+</footer>
+
+</body>
+</html>
